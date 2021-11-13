@@ -6,6 +6,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PostComponent } from './components/post/post.component';
 import { ParcelComponent } from './components/parcel/parcel.component';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: '', component: ParcelComponent },
+  { path: 'menus', component: PostComponent },
+];
 
 @NgModule({
   declarations: [
@@ -17,7 +23,10 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    RouterModule.forRoot(
+      appRoutes
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]
