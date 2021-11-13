@@ -1,0 +1,53 @@
+<div class="container bg-primary p-1 my-1 border">
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Gavėjas" [(ngModel)]="phoneNo">
+        <input type="text" class="form-control" placeholder="Svoris" [(ngModel)]="weight">
+        <input type="text" class="form-control" placeholder="Siuntėjas" [(ngModel)]="info">
+        <select class="form-control" [(ngModel)]="postId">
+            <option *ngFor="let post of posts" [value]="post.id">
+                {{post.town}} "{{post.postCode}}"
+            </option>
+        </select>
+
+        <button type="button" *ngIf="editMode == false" class="btn btn-success btn-rounded" (click)="addParcel()">Nauja
+            siunta</button>
+        <button type="button" *ngIf="editMode == true" class="btn btn-warning"
+            (click)="sendUpdatedParcel()">Patvirtink</button>
+    </div>
+</div>
+<div class="mr-2 blue-text">
+    <label>Siuntos pagal paštomatus</label>
+    <select [(ngModel)]="filteredByPostCode">
+        <option selected [ngValue]=0>All</option>
+        <option *ngFor="let post of posts" [ngValue]="post.id">
+            {{post.postCode}}
+        </option>
+    </select>
+    <button (click)="getAllParcelsByPost(filteredByPostCode)">Filtras</button>
+</div>
+
+<div class="container bg-light p-1 my-1 border">
+    <table class="table table-bordered table-sm">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Gavėjas</th>
+                <th scope="col">Svoris</th>
+                <th scope="col">Siuntėjas</th>
+                <th scope="col">Paštomatas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let parcel of parcels; index as i">
+                <th>{{i+1}}</th>
+                <td class="mr-2 blue-text table-success text-center">{{parcel.phoneNo}}</td>
+                <td class="mr-2 blue-text table-default text-center">{{parcel.weight}}</td>
+                <td class="mr-2 blue-text table-default text-center">{{parcel.info}}</td>
+                <td class="mr-2 blue-text table-info bg-warning text-center">{{parcel.postCode}}</td>
+
+                <td><button type="button" class="btn btn-danger" (click)="deleteParcel(parcel.id)">Delete</button></td>
+                <td><button type="button" class="btn btn-warning" (click)="updateParcel(parcel)">Update</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,32 @@
+<div class="container bg-primary p-1 border">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Miestas" [(ngModel)]="town">
+      <input type="text" class="form-control" placeholder="Max siuntų kiekis" [(ngModel)]="capacity">      
+      <input type="text" class="form-control" placeholder="Paštomatas" [(ngModel)]="postCode">
+  
+      <button type="button" *ngIf="editMode == false" class="btn btn-success btn-rounded" (click)="addPost()">Naujas paštas</button>
+      <button type="button" *ngIf="editMode == true" class="btn btn-warning" (click)="sendUpdatedPost()">Atnaujink</button>
+    </div>
+  </div>
+  <div class="container bg-light p-1 my-1 border">
+    <table class="table table-bordered table-sm">
+      <thead class ="thead-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Miestas</th>
+          <th scope="col">Max siuntų kiekis</th>
+          <th scope="col">Paštomatas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  *ngFor = "let post of posts; index as i">
+          <th>{{i+1}}</th>
+          <td class="mr-2 blue-text table-secondary">{{post.town}}</td>
+          <td class="mr-2 blue-text table-warning">{{post.capacity}}</td>
+          <td class="mr-2 blue-text table-default">{{post.postCode}}</td>
+          <td><button type="button" class="btn btn-danger" (click)="deletePost(post.id)">Delete</button></td>
+          <td><button type="button" class="btn btn-warning" (click)="updatePost(post)">Update</button></td>
+        </tr>
+      </tbody>  
+    </table>
+  </div>
